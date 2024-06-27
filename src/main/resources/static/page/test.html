@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--  匯入Axios-->
+    <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+    <!--  匯入CKEditor-->
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.2.1/balloon/ckeditor.js"></script>
+
+    <title>CKEditor Example</title>
+</head>
+<body>
+<h1>CKEditor Example</h1>
+<div id="editor">
+    <!-- CKEditor 編輯視窗 -->
+</div>
+
+<button onclick="saveData()">Save Data</button>
+<hr>
+<div id="dataHtml"></div>
+<hr>
+<div id="data"></div>
+
+<script>
+let nickname;
+let memberid;
+let editorContent = '';
+
+axios.get('/getUserProfiles')
+        .then(response => {
+            const member = response.data; // 獲取伺服器返回的會員物件
+            nickname = member.nickname; // 從會員物件中提取 nickname 屬性
+            memberid = member.memberid; // 從會員物件中提取 memberid 屬性
+            //set nickname to #data
+            document.getElementById("dataHtml").innerHTML = nickname;
+            document.getElementById("data").textContent = nickname;
+            console.log('獲取會員信息成功，會員id為:', memberid);
+            console.log('獲取會員信息成功，會員暱稱為:', nickname);
+
+            BalloonEditor
+                .create(document.querySelector('#editor'))
+                .then(newEditor => {
+                    // 編輯器初始化完成時的處理
+                    newEditor.setData(nickname);
+                    newEditor.model.document.on('change:data', () => {
+                        editorContent = newEditor.getData();
+                    });
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        });
+
+
+
+
+    async function saveData() {
+        try {
+
+            console.log(editorContent);
+            const data = editorContent;
+            await axios.put(`/api/members/${memberid}`, {"nickname": data});
+            alert('Data saved successfully!');
+        } catch (error) {
+            console.error('Error saving data:', error);
+        }
+    }
+</script>
+</body>
+</html>

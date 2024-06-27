@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <button type="button" @click="click1()">button</button>
+        
+    <!--  匯入SweetAlert2-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body id="app">
+
+    <script src="https://www.unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+    <script type="module">
+import { createApp } from "https://unpkg.com/vue@3.4.19/dist/vue.esm-browser.prod.js";
+    const xxx = createApp({
+        data: function () {
+          return {
+            isShow: true,
+
+
+            };
+        },
+        methods: {
+            click1(){
+                console.log("click1()!")
+                axios.get('/getUserProfiles')
+                    .then(response => {
+                        const member = response.data; // 獲取伺服器返回的會員物件
+                        const nickname = member.nickname; // 從會員物件中提取 nickname 屬性
+                        const memberid = member.memberid; // 從會員物件中提取 memberid 屬性
+                        console.log('獲取會員信息成功，會員id為:', memberid);
+                        // 顯示 SweetAlert 彈窗,並將 nickname 插入到 text 中
+                        Swal.fire({
+                            title: '登入成功!',
+                            text: `歡迎，${nickname}!`,
+                            icon: 'success',
+                            confirmButtonText: '回首頁'
+                        }).then(result => {
+                            if (result.isConfirmed) {
+                                window.location.href = '/index';
+                            }
+                        });
+                    })
+                    .catch(error => {
+                        console.error('獲取會員信息失敗:', error);
+                        // 處理錯誤情況
+                    });
+            },
+        }
+    })
+    xxx.mount("#app");
+
+    </script>
+</body>
+</html>

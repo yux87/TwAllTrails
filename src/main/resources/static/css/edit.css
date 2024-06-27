@@ -1,0 +1,50 @@
+#threadForm {
+    display: none;
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#threadForm h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+#addEditThreadForm label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#addEditThreadForm input[type="text"],
+#addEditThreadForm textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+#addEditThreadForm textarea {
+    height: 200px;
+}
+
+#addEditThreadForm input[type="button"] {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#addEditThreadForm input[type="button"]:hover {
+    background-color: #45a049;
+}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--  匯入Axios-->
+    <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+    <title>愛登</title>
+    <link rel="stylesheet" href="/css/index.css">
+    <style type="text/css">
+    .dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+    /*iframe {*/
+    /*    display: block;*/
+    /*    margin: auto;*/
+    /*}*/
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Logo</h1>
+    <nav>
+        <a href="/forum" >論壇</a>
+        <a href="/toCustomerPage">路線資訊</a>
+        <a href="/gear" class="dropbtn">裝備商城</a>
+        <a href="#" class="active"id="member-tag"></a>
+    </nav>
+</header>
+
+
+<section class="home">
+<!--    <img src="assets/mount2.png" class="mount2">-->
+<!--    <img src="assets/mount1.png" class="mount1">-->
+<!--    <img src="assets/bush2.png" class="bush2">-->
+
+<!--    <h1 class="title">「與朋友攜手登山，共享自然之美」</h1>-->
+    <iframe src="/toTrailFilter" width="100%" height="85%" style="display: block; margin: auto;"></iframe>
+
+
+<!--    <img src="assets/bush1.png" class="bush1">-->
+<!--    <img src="assets/leaf2.png" class="leaf2">-->
+<!--    <img src="assets/leaf1.png" class="leaf1">-->
+</section>
+
+<section class="about">
+     <h1>歡迎來到大自然的擁抱！</h1>
+    <br>
+    <p>在這裡，我們相信每個人都應該能夠輕鬆地進入大自然，探索美麗的山川湖海，享受與自然的親密接觸。我們的平台致力於營造一個交流、分享和學習的空間，讓野外活動愛好者們能夠彼此連結，互相啟發，以及找到所需的資源。不論你是新手還是老手，這裡都有適合你的角落。讓我們一起踏上冒險之旅，探索未知的世界！</p>
+    <br>
+    <h2>會員系統：體驗無縫接軌</h2>
+    <p>由鍾良澤負責開發的會員系統，確保你的加入和參與變得輕而易舉。無論你是首次使用者還是老朋友，透過我們的系統，你可以輕鬆註冊、登錄和管理個人資訊。更重要的是，這個系統將讓你無縫接軌到我們的平台，享受到更多精彩的功能和內容。讓我們一同建立一個共融的社群，共同分享野外活動的樂趣！</p>
+    <br>
+    <h2>商城系統：裝備靈感無限</h2>
+    <p>在黃建銘負責開發的商城系統裡，你將發現無盡的登山裝備和相關產品。無論你是準備挑戰高山還是漫步林間，我們的商城都能滿足你對裝備的各種需求。精選的產品、優惠的價格，以及方便的購物體驗，讓你無需花費過多時間就能找到心儀的裝備，輕裝上陣，盡情探索大自然的奧秘！</p>
+    <br>
+    <h2>論壇系統：故事交流無限</h2>
+    <p>由盧立芬負責開發的論壇系統，是我們平台上的一個熱鬧角落，這裡聚集了各路野外活動愛好者，分享著他們的冒險故事和寶貴經驗。無論你是想要分享自己的探險歷程，還是尋找靈感和建議，論壇都將是你的最佳去處。在這裡，你可以和志同道合的夥伴們一起探討路線、交換心得，甚至組隊進行新的冒險。讓我們共同豐富這個平台，讓每個野外活動愛好者都能在這裡找到屬於自己的家！</p>
+    <br>
+    <h2>路徑查詢系統：探索指尖在握</h2>
+    <p>由曾毓翔負責開發的路徑查詢系統，將為你提供一條通向未知的道路。無論你身處何地，透過我們的系統，你都可以輕鬆尋找到新的步道和行程。精心策劃的路線、詳盡的資訊，以及方便的查詢功能，讓你能夠事先瞭解目的地的情況，做好充分的準備。讓我們一同探索大自然的奧秘，挑戰未知的領域，讓每一次的步行都成為一段難忘的回憶！</p>
+    <br>
+    <p>在這個充滿挑戰與機遇的旅程中，我們期待著與你一同前行。讓我們攜手同行，探索大自然的無限魅力，共同譜寫屬於我們的冒險故事！</p>
+</section>
+
+<script src="../js/index.js"></script>
+<script type="text/javascript">
+//JavaScript to show/hide dropdown menu
+function showDropdown() {
+  document.getElementById("dropdownContent").style.display = "block";
+}
+
+function hideDropdown() {
+  document.getElementById("dropdownContent").style.display = "none";
+}
+</script>
+
+</body>
+</html>

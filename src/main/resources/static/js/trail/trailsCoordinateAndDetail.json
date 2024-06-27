@@ -1,0 +1,1345 @@
+[
+  {
+    "place_name": "蘇花古道：大南澳越嶺段",
+    "place_coordinate": {
+      "lat": 24.4793107,
+      "lng": 121.8329461
+    },
+    "place_length": "蘇花古道：大南澳越嶺段",
+    "place_dif_class": "2",
+    "place_class": "國家級步道"
+  },
+  {
+    "place_name": "南澳古道",
+    "place_coordinate": {
+      "lat": 24.4238124,
+      "lng": 121.7094947
+    },
+    "place_length": "南澳古道",
+    "place_dif_class": "1",
+    "place_class": "國家級步道"
+  },
+  {
+    "place_name": "新店獅頭山步道",
+    "place_coordinate": {
+      "lat": 24.9561114,
+      "lng": 121.5484268
+    },
+    "place_length": "新店獅頭山步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "金瓜寮魚蕨步道",
+    "place_coordinate": {
+      "lat": 24.8991141,
+      "lng": 121.6729201
+    },
+    "place_length": "金瓜寮魚蕨步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "拳頭姆自然步道",
+    "place_coordinate": {
+      "lat": 24.6568,
+      "lng": 121.6148389
+    },
+    "place_length": "拳頭姆自然步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "松羅步道",
+    "place_coordinate": {
+      "lat": 24.669464,
+      "lng": 121.5558427
+    },
+    "place_length": "松羅步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "礁溪跑馬古道",
+    "place_coordinate": {
+      "lat": 24.8379958,
+      "lng": 121.7725226
+    },
+    "place_length": "礁溪跑馬古道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "林美石磐步道",
+    "place_coordinate": {
+      "lat": 24.8225555,
+      "lng": 121.7357007
+    },
+    "place_length": "林美石磐步道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "聖母登山步道",
+    "place_coordinate": {
+      "lat": 24.8481508,
+      "lng": 121.7351666
+    },
+    "place_length": "聖母登山步道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "新寮瀑布步道",
+    "place_coordinate": {
+      "lat": 24.6062322,
+      "lng": 121.7470165
+    },
+    "place_length": "新寮瀑布步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "九寮溪自然步道",
+    "place_coordinate": {
+      "lat": 24.6737613,
+      "lng": 121.5995228
+    },
+    "place_length": "九寮溪自然步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "台灣山毛櫸步道",
+    "place_coordinate": {
+      "lat": 24.5092417,
+      "lng": 121.61013
+    },
+    "place_length": "台灣山毛櫸步道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "翠峰湖環山步道",
+    "place_coordinate": {
+      "lat": 24.5107709,
+      "lng": 121.6086183
+    },
+    "place_length": "翠峰湖環山步道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "茂興懷舊步道",
+    "place_coordinate": {
+      "lat": 24.478525,
+      "lng": 121.5359873
+    },
+    "place_length": "茂興懷舊步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "三疊瀑布步道",
+    "place_coordinate": {
+      "lat": 24.472709,
+      "lng": 121.544788
+    },
+    "place_length": "三疊瀑布步道",
+    "place_dif_class": "3",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "鐵杉林自然步道",
+    "place_coordinate": {
+      "lat": 24.4958754,
+      "lng": 121.5288235
+    },
+    "place_length": "鐵杉林自然步道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "見晴懷古步道",
+    "place_coordinate": {
+      "lat": 24.5051895,
+      "lng": 121.5256882
+    },
+    "place_length": "見晴懷古步道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "鳩之澤自然步道",
+    "place_coordinate": {
+      "lat": 24.546855,
+      "lng": 121.507051
+    },
+    "place_length": "鳩之澤自然步道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "望洋山步道",
+    "place_coordinate": {
+      "lat": 24.5101954,
+      "lng": 121.6090163
+    },
+    "place_length": "望洋山步道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "朝陽步道",
+    "place_coordinate": {
+      "lat": 24.4611582,
+      "lng": 121.8192249
+    },
+    "place_length": "朝陽步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "東滿步道",
+    "place_coordinate": {
+      "lat": 24.8161877,
+      "lng": 121.4167761
+    },
+    "place_length": "東滿步道",
+    "place_dif_class": "2",
+    "place_class": "國家級步道"
+  },
+  {
+    "place_name": "福巴越嶺國家步道",
+    "place_coordinate": {
+      "lat": 24.7116248,
+      "lng": 121.4411608
+    },
+    "place_length": "福巴越嶺國家步道",
+    "place_dif_class": "3",
+    "place_class": "國家級步道"
+  },
+  {
+    "place_name": "北插天山登山步道",
+    "place_coordinate": {
+      "lat": 24.792002,
+      "lng": 121.452628
+    },
+    "place_length": "北插天山登山步道",
+    "place_dif_class": "3",
+    "place_class": "國家級步道"
+  },
+  {
+    "place_name": "霞喀羅國家步道",
+    "place_coordinate": {
+      "lat": 24.5888581,
+      "lng": 121.2540381
+    },
+    "place_length": "霞喀羅國家步道",
+    "place_dif_class": "2",
+    "place_class": "國家級步道"
+  },
+  {
+    "place_name": "大霸尖山登山步道",
+    "place_coordinate": {
+      "lat": 24.4591923,
+      "lng": 121.2596588
+    },
+    "place_length": "大霸尖山登山步道",
+    "place_dif_class": "4",
+    "place_class": "國家級步道"
+  },
+  {
+    "place_name": "桶後越嶺步道",
+    "place_coordinate": {
+      "lat": 24.8206368,
+      "lng": 121.6867251
+    },
+    "place_length": "桶後越嶺步道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "哈盆越嶺步道",
+    "place_coordinate": {
+      "lat": 24.7761138,
+      "lng": 121.5136414
+    },
+    "place_length": "哈盆越嶺步道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "滿月圓國家森林遊樂區步道群",
+    "place_coordinate": {
+      "lat": 24.8249472,
+      "lng": 121.4475639
+    },
+    "place_length": "滿月圓國家森林遊樂區步道群",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "北得拉曼巨木步道",
+    "place_coordinate": {
+      "lat": 24.736679,
+      "lng": 121.286829
+    },
+    "place_length": "北得拉曼巨木步道",
+    "place_dif_class": "3",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "鎮西堡巨木群步道",
+    "place_coordinate": {
+      "lat": 24.5536537,
+      "lng": 121.2927271
+    },
+    "place_length": "鎮西堡巨木群步道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "鳥嘴山登山步道",
+    "place_coordinate": {
+      "lat": 24.4602342,
+      "lng": 120.9845785
+    },
+    "place_length": "鳥嘴山登山步道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "加里山登山步道",
+    "place_coordinate": {
+      "lat": 24.525804,
+      "lng": 121.025541
+    },
+    "place_length": "加里山登山步道",
+    "place_dif_class": "3",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "五指山登山步道",
+    "place_coordinate": {
+      "lat": 24.6440423,
+      "lng": 121.0917545
+    },
+    "place_length": "五指山登山步道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "冬瓜山登山步道",
+    "place_coordinate": {
+      "lat": 24.4611726,
+      "lng": 120.9706622
+    },
+    "place_length": "冬瓜山登山步道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "馬拉邦山登山步道",
+    "place_coordinate": {
+      "lat": 24.368714,
+      "lng": 120.914293
+    },
+    "place_length": "馬拉邦山登山步道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "橫嶺山步道",
+    "place_coordinate": {
+      "lat": 24.236846,
+      "lng": 120.948607
+    },
+    "place_length": "橫嶺山步道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "大雪山國家森林遊樂區步道群",
+    "place_coordinate": {
+      "lat": 24.244563,
+      "lng": 120.9751163
+    },
+    "place_length": "大雪山國家森林遊樂區步道群",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "八仙山國家森林遊樂區步道群",
+    "place_coordinate": {
+      "lat": 24.1805572,
+      "lng": 121.0024962
+    },
+    "place_length": "八仙山國家森林遊樂區步道群",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "德芙蘭步道",
+    "place_coordinate": {
+      "lat": 24.1806732,
+      "lng": 120.973859
+    },
+    "place_length": "德芙蘭步道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "八仙山主峰步道",
+    "place_coordinate": {
+      "lat": 24.188431,
+      "lng": 121.0133278
+    },
+    "place_length": "八仙山主峰步道",
+    "place_dif_class": "3",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "東卯山步道",
+    "place_coordinate": {
+      "lat": 24.1750903,
+      "lng": 120.9439574
+    },
+    "place_length": "東卯山步道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "唐麻丹山步道",
+    "place_coordinate": {
+      "lat": 24.1647495,
+      "lng": 120.9573537
+    },
+    "place_length": "唐麻丹山步道",
+    "place_dif_class": "3",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "波津加山步道",
+    "place_coordinate": {
+      "lat": 24.2069178,
+      "lng": 121.008549
+    },
+    "place_length": "波津加山步道",
+    "place_dif_class": "3",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "屋我尾山步道",
+    "place_coordinate": {
+      "lat": 24.2110062,
+      "lng": 120.9713401
+    },
+    "place_length": "屋我尾山步道",
+    "place_dif_class": "3",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "新山馬崙山步道",
+    "place_coordinate": {
+      "lat": 24.1905617,
+      "lng": 121.0276155
+    },
+    "place_length": "新山馬崙山步道",
+    "place_dif_class": "3",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "斯可巴步道",
+    "place_coordinate": {
+      "lat": 24.1986974,
+      "lng": 121.0181946
+    },
+    "place_length": "斯可巴步道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "白毛山步道",
+    "place_coordinate": {
+      "lat": 24.1686955,
+      "lng": 120.9194347
+    },
+    "place_length": "白毛山步道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "鳶嘴稍來小雪山國家步道",
+    "place_coordinate": {
+      "lat": 24.269361,
+      "lng": 120.99762
+    },
+    "place_length": "鳶嘴稍來小雪山國家步道",
+    "place_dif_class": "4",
+    "place_class": "國家級步道"
+  },
+  {
+    "place_name": "合歡尖山步道",
+    "place_coordinate": {
+      "lat": 24.1426744,
+      "lng": 121.2845616
+    },
+    "place_length": "合歡尖山步道",
+    "place_dif_class": "3",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "合歡東峰步道",
+    "place_coordinate": {
+      "lat": 24.1397605,
+      "lng": 121.287364
+    },
+    "place_length": "合歡東峰步道",
+    "place_dif_class": "3",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "桃山瀑布步道",
+    "place_coordinate": {
+      "lat": 24.410762,
+      "lng": 121.3030009
+    },
+    "place_length": "桃山瀑布步道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "能高越嶺道",
+    "place_coordinate": {
+      "lat": 24.0250858,
+      "lng": 121.2792398
+    },
+    "place_length": "能高越嶺道",
+    "place_dif_class": "4",
+    "place_class": "國家級步道"
+  },
+  {
+    "place_name": "桃源里森林步道",
+    "place_coordinate": {
+      "lat": 24.065018,
+      "lng": 120.567634
+    },
+    "place_length": "桃源里森林步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "清水岩(中央嶺、二棧坪、十八彎)步道群",
+    "place_coordinate": {
+      "lat": 23.883861,
+      "lng": 120.615958
+    },
+    "place_length": "清水岩(中央嶺、二棧坪、十八彎)步道群",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "麒麟山森林步道",
+    "place_coordinate": {
+      "lat": 23.8616638,
+      "lng": 120.6111982
+    },
+    "place_length": "麒麟山森林步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "香山森林步道",
+    "place_coordinate": {
+      "lat": 23.8412398,
+      "lng": 120.6139143
+    },
+    "place_length": "香山森林步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "坑內坑森林步道",
+    "place_coordinate": {
+      "lat": 23.828683,
+      "lng": 120.6145885
+    },
+    "place_length": "坑內坑森林步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "廟前坑森林步道",
+    "place_coordinate": {
+      "lat": 23.8252136,
+      "lng": 120.6242596
+    },
+    "place_length": "廟前坑森林步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "奧萬大國家森林遊樂區步道群",
+    "place_coordinate": {
+      "lat": 23.9643714,
+      "lng": 121.1801555
+    },
+    "place_length": "奧萬大國家森林遊樂區步道群",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "澀水森林步道",
+    "place_coordinate": {
+      "lat": 23.9229237,
+      "lng": 120.9172041
+    },
+    "place_length": "澀水森林步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "鯉魚潭森林步道",
+    "place_coordinate": {
+      "lat": 23.9634219,
+      "lng": 120.9906
+    },
+    "place_length": "鯉魚潭森林步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "龍過脈森林步道",
+    "place_coordinate": {
+      "lat": 23.752307,
+      "lng": 120.620771
+    },
+    "place_length": "龍過脈森林步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "二崙自然步道",
+    "place_coordinate": {
+      "lat": 23.815794,
+      "lng": 120.3942892
+    },
+    "place_length": "二崙自然步道",
+    "place_dif_class": "1",
+    "place_class": "其它"
+  },
+  {
+    "place_name": "塔山步道",
+    "place_coordinate": {
+      "lat": 23.5185319,
+      "lng": 120.8163173
+    },
+    "place_length": "塔山步道",
+    "place_dif_class": "2",
+    "place_class": "國家級步道"
+  },
+  {
+    "place_name": "特富野古道",
+    "place_coordinate": {
+      "lat": 23.4840479,
+      "lng": 120.8300103
+    },
+    "place_length": "特富野古道",
+    "place_dif_class": "2",
+    "place_class": "國家級步道"
+  },
+  {
+    "place_name": "嘉南雲峰步道",
+    "place_coordinate": {
+      "lat": 23.6131179,
+      "lng": 120.7206195
+    },
+    "place_length": "嘉南雲峰步道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "瑞太古道",
+    "place_coordinate": {
+      "lat": 23.543292,
+      "lng": 120.683513
+    },
+    "place_length": "瑞太古道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "四大天王山步道",
+    "place_coordinate": {
+      "lat": 23.519576,
+      "lng": 120.647873
+    },
+    "place_length": "四大天王山步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "獨立山步道",
+    "place_coordinate": {
+      "lat": 23.532931,
+      "lng": 120.6027033
+    },
+    "place_length": "獨立山步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "獨立山-大巃頂步道",
+    "place_coordinate": {
+      "lat": 23.5521683,
+      "lng": 120.6036267
+    },
+    "place_length": "獨立山-大巃頂步道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "杜仔湖步道",
+    "place_coordinate": {
+      "lat": 23.4166317,
+      "lng": 120.6436385
+    },
+    "place_length": "杜仔湖步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "瑞里-水社寮步道",
+    "place_coordinate": {
+      "lat": 23.5047034,
+      "lng": 120.6596517
+    },
+    "place_length": "瑞里-水社寮步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "太平雲梯-獨立山大巃頂步道",
+    "place_coordinate": {
+      "lat": 23.5521683,
+      "lng": 120.6036267
+    },
+    "place_length": "太平雲梯-獨立山大巃頂步道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "石夢谷步道",
+    "place_coordinate": {
+      "lat": 23.5738345,
+      "lng": 120.7717847
+    },
+    "place_length": "石夢谷步道",
+    "place_dif_class": "3",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "金獅村步道",
+    "place_coordinate": {
+      "lat": 23.5172857,
+      "lng": 120.6082401
+    },
+    "place_length": "金獅村步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "茶之道步道",
+    "place_coordinate": {
+      "lat": 23.4776292,
+      "lng": 120.706191
+    },
+    "place_length": "茶之道步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "對高岳森林浴步道",
+    "place_coordinate": {
+      "lat": 23.5192695,
+      "lng": 120.8190202
+    },
+    "place_length": "對高岳森林浴步道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "阿里山國家森林遊樂區巨木群步道",
+    "place_coordinate": {
+      "lat": 23.5167437,
+      "lng": 120.8096083
+    },
+    "place_length": "阿里山國家森林遊樂區巨木群步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "二萬坪步道",
+    "place_coordinate": {
+      "lat": 23.5022238,
+      "lng": 120.7883446
+    },
+    "place_length": "二萬坪步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "十字路來吉古道",
+    "place_coordinate": {
+      "lat": 23.520406,
+      "lng": 120.744831
+    },
+    "place_length": "十字路來吉古道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "里佳-山美步道",
+    "place_coordinate": {
+      "lat": 23.394015,
+      "lng": 120.6980254
+    },
+    "place_length": "里佳-山美步道",
+    "place_dif_class": "3",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "奮瑞古道",
+    "place_coordinate": {
+      "lat": 23.5048715,
+      "lng": 120.6931062
+    },
+    "place_length": "奮瑞古道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "奮起湖大凍山步道",
+    "place_coordinate": {
+      "lat": 23.5001439,
+      "lng": 120.7123875
+    },
+    "place_length": "奮起湖大凍山步道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "新美內沙谷步道",
+    "place_coordinate": {
+      "lat": 23.33012,
+      "lng": 120.683117
+    },
+    "place_length": "新美內沙谷步道",
+    "place_dif_class": "3",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "土匪山步道",
+    "place_coordinate": {
+      "lat": 23.4248357,
+      "lng": 120.6016817
+    },
+    "place_length": "土匪山步道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "龍銀山步道",
+    "place_coordinate": {
+      "lat": 23.444614,
+      "lng": 120.6721058
+    },
+    "place_length": "龍銀山步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "關仔嶺大凍山步道",
+    "place_coordinate": {
+      "lat": 23.315941,
+      "lng": 120.5134193
+    },
+    "place_length": "關仔嶺大凍山步道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "關仔嶺碧雲寺-水火同源登山步道",
+    "place_coordinate": {
+      "lat": 23.3252675,
+      "lng": 120.4811295
+    },
+    "place_length": "關仔嶺碧雲寺-水火同源登山步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "崁頂步道",
+    "place_coordinate": {
+      "lat": 22.5156285,
+      "lng": 120.5051842
+    },
+    "place_length": "崁頂步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "雞巃山步道",
+    "place_coordinate": {
+      "lat": 23.3191406,
+      "lng": 120.5187859
+    },
+    "place_length": "雞巃山步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "崁頭山步道",
+    "place_coordinate": {
+      "lat": 23.2659169,
+      "lng": 120.5045708
+    },
+    "place_length": "崁頭山步道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "大埔大巃三角點步道",
+    "place_coordinate": {
+      "lat": 23.3109849,
+      "lng": 120.5225914
+    },
+    "place_length": "大埔大巃三角點步道",
+    "place_dif_class": "3",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "鈺鼎步道",
+    "place_coordinate": {
+      "lat": 23.0831144,
+      "lng": 120.5093691
+    },
+    "place_length": "鈺鼎步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "北大武山步道",
+    "place_coordinate": {
+      "lat": 22.6145008,
+      "lng": 120.7017865
+    },
+    "place_length": "北大武山步道",
+    "place_dif_class": "5",
+    "place_class": "國家級步道"
+  },
+  {
+    "error": "Error processing 六龜警備道：藤枝段: Place not found or API error for 六龜警備道：藤枝段"
+  },
+  {
+    "place_name": "浸水營古道",
+    "place_coordinate": {
+      "lat": 22.407632,
+      "lng": 120.7565448
+    },
+    "place_length": "浸水營古道",
+    "place_dif_class": "2",
+    "place_class": "國家級步道"
+  },
+  {
+    "place_name": "美濃雙溪樹木園步道",
+    "place_coordinate": {
+      "lat": 22.9332588,
+      "lng": 120.5917529
+    },
+    "place_length": "美濃雙溪樹木園步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "美濃靈山登山步道",
+    "place_coordinate": {
+      "lat": 22.910525,
+      "lng": 120.520593
+    },
+    "place_length": "美濃靈山登山步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "藤枝國家森林遊樂區步道群",
+    "place_coordinate": {
+      "lat": 23.0675845,
+      "lng": 120.7544134
+    },
+    "place_length": "藤枝國家森林遊樂區步道群",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "六義山步道",
+    "place_coordinate": {
+      "lat": 23.0946548,
+      "lng": 120.575894
+    },
+    "place_length": "六義山步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "尾寮山登山步道",
+    "place_coordinate": {
+      "lat": 22.8655284,
+      "lng": 120.652602
+    },
+    "place_length": "尾寮山登山步道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "里龍山步道",
+    "place_coordinate": {
+      "lat": 22.1590962,
+      "lng": 120.7116384
+    },
+    "place_length": "里龍山步道",
+    "place_dif_class": "3",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "雙流國家森林遊樂區步道群",
+    "place_coordinate": {
+      "lat": 22.2161497,
+      "lng": 120.7995687
+    },
+    "place_length": "雙流國家森林遊樂區步道群",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "墾丁國家森林遊樂區步道群",
+    "place_coordinate": {
+      "lat": 21.9589636,
+      "lng": 120.8118718
+    },
+    "place_length": "墾丁國家森林遊樂區步道群",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "石門山步道",
+    "place_coordinate": {
+      "lat": 24.1462387,
+      "lng": 121.2842047
+    },
+    "place_length": "石門山步道",
+    "place_dif_class": "3",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "高士佛步道",
+    "place_coordinate": {
+      "lat": 22.1317306,
+      "lng": 120.7958763
+    },
+    "place_length": "高士佛步道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "嘉明湖國家步道",
+    "place_coordinate": {
+      "lat": 23.2553379,
+      "lng": 120.9837701
+    },
+    "place_length": "嘉明湖國家步道",
+    "place_dif_class": "4",
+    "place_class": "國家級步道"
+  },
+  {
+    "place_name": "都蘭山步道",
+    "place_coordinate": {
+      "lat": 22.8843032,
+      "lng": 121.1802307
+    },
+    "place_length": "都蘭山步道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "麻荖漏步道",
+    "place_coordinate": {
+      "lat": 23.1298971,
+      "lng": 121.3474542
+    },
+    "place_length": "麻荖漏步道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "知本國家森林遊樂區步道群",
+    "place_coordinate": {
+      "lat": 22.689758,
+      "lng": 120.985823
+    },
+    "place_length": "知本國家森林遊樂區步道群",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "鯉魚山步道",
+    "place_coordinate": {
+      "lat": 23.9227737,
+      "lng": 121.5125219
+    },
+    "place_length": "鯉魚山步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "關山嶺山步道",
+    "place_coordinate": {
+      "lat": 23.2707659,
+      "lng": 120.9595525
+    },
+    "place_length": "關山嶺山步道",
+    "place_dif_class": "4",
+    "place_class": "其它"
+  },
+  {
+    "place_name": "大武觀海步道",
+    "place_coordinate": {
+      "lat": 22.3581218,
+      "lng": 120.9035881
+    },
+    "place_length": "大武觀海步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "月眉山步道",
+    "place_coordinate": {
+      "lat": 23.8143627,
+      "lng": 121.5423612
+    },
+    "place_length": "月眉山步道",
+    "place_dif_class": "1",
+    "place_class": "國家級步道"
+  },
+  {
+    "place_name": "安通越嶺道：西段",
+    "place_coordinate": {
+      "lat": 23.2847132,
+      "lng": 121.372387
+    },
+    "place_length": "安通越嶺道：西段",
+    "place_dif_class": "1",
+    "place_class": "國家級步道"
+  },
+  {
+    "place_name": "八通關越道：鹿鳴吊橋段",
+    "place_coordinate": {
+      "lat": 23.3180529,
+      "lng": 121.2543815
+    },
+    "place_length": "八通關越道：鹿鳴吊橋段",
+    "place_dif_class": "1",
+    "place_class": "國家級步道"
+  },
+  {
+    "place_name": "佐倉步道",
+    "place_coordinate": {
+      "lat": 24.0185644,
+      "lng": 121.5765521
+    },
+    "place_length": "佐倉步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "鯉魚山步道群",
+    "place_coordinate": {
+      "lat": 23.919067,
+      "lng": 121.520656
+    },
+    "place_length": "鯉魚山步道群",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "富源國家森林遊樂區步道群",
+    "place_coordinate": {
+      "lat": 23.5879077,
+      "lng": 121.3477433
+    },
+    "place_length": "富源國家森林遊樂區步道群",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "富興步道",
+    "place_coordinate": {
+      "lat": 23.5716376,
+      "lng": 121.401616
+    },
+    "place_length": "富興步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "虎頭山步道",
+    "place_coordinate": {
+      "lat": 23.4998677,
+      "lng": 120.4776159
+    },
+    "place_length": "虎頭山步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "九九峰森林步道",
+    "place_coordinate": {
+      "lat": 23.9943397,
+      "lng": 120.7716826
+    },
+    "place_length": "九九峰森林步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "檜木原始林步道",
+    "place_coordinate": {
+      "lat": 24.494218,
+      "lng": 121.5349374
+    },
+    "place_length": "檜木原始林步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "關山紅石步道",
+    "place_coordinate": {
+      "lat": 23.0708454,
+      "lng": 121.1320583
+    },
+    "place_length": "關山紅石步道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "向陽國家森林遊樂區步道群",
+    "place_coordinate": {
+      "lat": 23.2509498,
+      "lng": 120.981229
+    },
+    "place_length": "向陽國家森林遊樂區步道群",
+    "place_dif_class": "2",
+    "place_class": "其它"
+  },
+  {
+    "place_name": "鎮南宮步道",
+    "place_coordinate": {
+      "lat": 23.2218944,
+      "lng": 120.3677916
+    },
+    "place_length": "鎮南宮步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "福山步道",
+    "place_coordinate": {
+      "lat": 23.4573153,
+      "lng": 120.7186908
+    },
+    "place_length": "福山步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "里美避難步道",
+    "place_coordinate": {
+      "lat": 23.3818262,
+      "lng": 120.682442
+    },
+    "place_length": "里美避難步道",
+    "place_dif_class": "4",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "龍麟山步道",
+    "place_coordinate": {
+      "lat": 23.0134547,
+      "lng": 120.4797445
+    },
+    "place_length": "龍麟山步道",
+    "place_dif_class": "2",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "仙井瀑布步道",
+    "place_coordinate": {
+      "lat": 23.409538,
+      "lng": 120.6715221
+    },
+    "place_length": "仙井瀑布步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "奮起湖肖楠母樹林",
+    "place_coordinate": {
+      "lat": 23.5040836,
+      "lng": 120.6954727
+    },
+    "place_length": "奮起湖肖楠母樹林",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "斯比斯比步道",
+    "place_coordinate": {
+      "lat": 23.527009,
+      "lng": 120.7403127
+    },
+    "place_length": "斯比斯比步道",
+    "place_dif_class": "3",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "水山步道",
+    "place_coordinate": {
+      "lat": 23.5052285,
+      "lng": 120.8034874
+    },
+    "place_length": "水山步道",
+    "place_dif_class": "1",
+    "place_class": "區域級步道"
+  },
+  {
+    "place_name": "浸水營步道：前段",
+    "place_coordinate": {
+      "lat": 22.407632,
+      "lng": 120.7565448
+    },
+    "place_length": "浸水營步道：前段",
+    "place_dif_class": "2",
+    "place_class": "國家級步道"
+  },
+  {
+    "place_name": "安通越嶺古道東段",
+    "place_coordinate": {
+      "lat": 23.2847132,
+      "lng": 121.372387
+    },
+    "place_length": "安通越嶺古道東段",
+    "place_dif_class": "3",
+    "place_class": "國家級步道"
+  }
+]

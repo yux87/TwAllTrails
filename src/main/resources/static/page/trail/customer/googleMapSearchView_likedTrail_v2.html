@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Interactive Map Prototype</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Leaflet.js CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    />
+
+    <!-- marker-clusterer -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/markerclustererplus/2.1.4/markerclusterer.min.js"></script>
+
+    <!-- <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script> -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+    <script src="https://www.unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+
+    <!-- Inline CSS for styling the map container and sidebar -->
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 500px;
+      }
+      .sidebar {
+        background-color: #f8f9fa;
+        padding: 10px;
+        width: 500px;
+        height: 100%;
+        overflow: auto;
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+      }
+      .sidebar h2 {
+        margin-top: 0;
+      }
+      .location-item {
+        background: #ffffff;
+        padding: 10px;
+        margin-bottom: 5px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .location-item:hover {
+        background: #f0f0f0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sidebar">
+      <!-- 路徑清單 -->
+      <div id="app" class="p-6" style="flex: 1">
+        <!-- <div><input type="text" style="border: 1px solid #ccc;" v-model="sharedText"></div> -->
+        <div
+          v-for="(trail, index) in trails"
+          :key="index"
+          class="max-w-lg mx-auto flex rounded overflow-hidden shadow-lg bg-white my-3"
+        >
+          <img class="w-1/2" :src="trail.photo" :alt="trail.name" @click="toAnotherPage(trail.id)"/>
+          <div class="w-1/2 p-4 flex flex-col justify-between">
+            <div>
+              <div class="font-bold text-xl mb-2" @click="toAnotherPage(trail.id)">{{ trail.name }}</div>
+              <p class="text-gray-700 text-base">
+                {{ trail.rating }} <span class="star-rating">★ ★ ★ ★ ★</span>
+                ({{ trail.reviews }} reviews)
+              </p>
+            </div>
+            <div>
+              <span
+                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+                >{{ trail.distance }} km</span
+              >
+              <span
+                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+                >{{ trail.duration }}</span
+              >
+              <button
+                type="button"
+                class="text-red-500 hover:text-red-600"
+                @click="likedTrail(trail)"
+              >
+                ♥ Liked {{ trail.liked }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="map"></div>
+
+    <input
+      id="place-input"
+      type="text"
+      placeholder="Search for a place"
+      style="
+        width: 100%;
+        max-width: 450px;
+        height: 40px;
+        margin-top: 10px;
+        padding: 0 10px;
+        border: 1px solid #ccc;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      "
+      v-model="sharedText"
+    />
+
+    <!-- 地圖 -->
+
+<!--    <script type="module" src="index.js"></script>-->
+<!--    <script src="../../js/index2.js"></script>-->
+    <script src="../../js/trail/index2.js"></script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAi7ohY8GM2LPNIJc1IfcdlQ6iW7dXFTKk&callback=initMap&libraries=places&v=weekly"
+      defer
+    ></script>
+
+    <script src="../../js/trail/fetchLikedTrail.js"></script>
+
+    <script>
+      // import { fetchLikedTrail } from './apiService.js';
+      let vueApp; // Declare a variable outside the Vue instance
+
+    vueApp = new Vue({
+        el: "#app",
+        data: {
+          trails: [
+            // Replace with your trail data
+            // { name: 'Sunset Boulevard', photo: 'https://via.placeholder.com/150', rating: '4.3', reviews: '559', distance: '2.3', duration: '1h 40m' },
+            // { name: 'Sunset Boulevard', photo: 'https://via.placeholder.com/150', rating: '4.3', reviews: '559', distance: '2.3', duration: '1h 40m' }
+            // ... other trails
+          ],
+          sharedText: "",
+          toInsertLike:[],
+        },
+        methods: {
+          callUpdateLikes(){
+
+          },
+          toAnotherPage(trailId) {
+            window.location.href = `/toDetailPage?id=${trailId}`;
+          },
+         callFindATrail(tname) {
+            console.log("callFindATrail!!!");
+            // let url = "/dto/getTrailByTname.controller/新店獅頭山步道";
+            let url = "/dto/getTrailByTname.controller/"+tname;
+            axios
+                .get(url)
+                .then((response) => {
+                    console.log("response", response.data);
+                    // Check if this.trails is defined and is an array, if not initialize it as an array
+                    if (!Array.isArray(this.trails)) {
+                        this.trails = [];
+                    }
+                    // Append new data to the existing array
+                    this.trails.push(response.data[0]);
+                    // If you want to merge arrays instead of pushing an array into an array, use the spread operator or Array.concat
+                    // Example for merging: this.trails = [...this.trails, ...response.data];
+
+                    const tid = response.data[0].id;
+                    
+                    window.fetchLikedTrail(tid, (data) => {
+                      const index = this.trails.findIndex((t) => t.id === tid);
+                      if (index !== -1) {
+                        this.$set(this.trails[index], 'liked', data);
+                      }
+                    }, (error) => {
+                      console.error("An error occurred:", error);
+                    });
+
+
+
+                })
+                .catch(function (error) {
+                    console.log("error", error);
+                });
+        }
+        ,
+        callEmpty(){
+          this.trails = [];
+        }
+        ,
+          async likedTrail(trail) {
+            // console.log("tid: "+trail.id);
+
+            //先取得會員id
+            try {
+              const response = await axios.get('/getUserProfiles');
+              const member = response.data; // 獲取伺服器返回的會員物件
+              const nickname = member.nickname; // 從會員物件中提取 nickname 屬性
+              const memberid = member.memberid; // 從會員物件中提取 memberid 屬性
+              // console.log('獲取會員信息成功，會員id為:', memberid);
+
+              if(memberid == null) {
+                console.log("請先登入");
+                return;
+              }
+
+              //將tid和mid 放入一個物件
+              if(this.toInsertLike != null) this.toInsertLike = [];
+              this.toInsertLike.push({ mid: memberid, tid: trail.id });
+
+              await axios.post('/manageLikedTrails', this.toInsertLike[0]);
+              console.log("insert or delete your liked trail!");
+
+            } catch (error) {
+              console.error('獲取會員信息失敗:', error);
+              // 處理錯誤情況
+              return; // Exit if there was an error fetching member info
+            }
+
+
+            const tid = trail.id;
+            window.fetchLikedTrail(tid, (data) => {
+                      const index = this.trails.findIndex((t) => t.id === tid);
+                      if (index !== -1) {
+                        this.$set(this.trails[index], 'liked', data);
+                      }
+                    }, (error) => {
+                      console.error("An error occurred:", error);
+                    });
+
+          },
+
+          callFind: function () {
+            // console.log("ddd");
+            let url = "/trailDto.controller";
+            axios
+              .get(url)
+              .then((response) => {
+                // console.log("callFind(), response", response.data);
+                this.trails = response.data;
+                // this.photo = response.data[20].photo;
+
+                // After trails data is set, fetch liked status for each trail
+                this.trails.forEach((trail) => {
+                  window.fetchLikedTrail(trail.id, (data) => {
+                    const index = this.trails.findIndex((t) => t.id === trail.id);
+                    if (index !== -1) {
+                      this.$set(this.trails[index], 'liked', data);
+                    }
+                  }, (error) => {
+                    console.error("An error occurred:", error);
+                  });
+                });
+
+
+              })
+              .catch(function (error) {
+                console.log("error", error);
+              });
+              
+              
+              
+          },
+        },
+        mounted() {
+          this.callFind(); // 在這裡調用callFind
+
+          //   this.$refs.input.focus(); // Correctly accessing ref
+
+          // Correctly initializing Bootstrap modal using Vue ref
+          const modalElement = this.$refs.exampleref;
+          if (modalElement) {
+            this.exampleModal = new bootstrap.Modal(modalElement);
+          }
+        },
+      });
+    </script>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+    const sidebar = document.querySelector('.sidebar'); // Use the appropriate selector for your sidebar
+    sidebar.addEventListener('scroll', () => {
+      const isAtBottom = sidebar.scrollTop + sidebar.clientHeight >= sidebar.scrollHeight;
+      if (isAtBottom) {
+        console.log('Sidebar has been scrolled to the bottom');
+        // You can add any function you want to execute when the sidebar reaches the bottom
+        loadMoreDetails();
+      }
+    });
+  });
+</script>
+
+
+
+    <!-- Leaflet.js JavaScript, after the div#map
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    
+    <script>
+        // Initialize the map on the "map" div with a given center and zoom
+        var map = L.map('map').setView([22.6273, 120.3014], 13);
+
+        // Adding a tile layer (the map background) using OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Function to fly to a specific location
+        function flyToLocation(lat, lng) {
+            map.flyTo([lat, lng], 17);
+        }
+
+        // Add markers to the map at the hardcoded locations
+        L.marker([22.6273, 120.3014]).addTo(map).bindPopup('Shou Shan Zoo');
+        L.marker([22.6256, 120.2658]).addTo(map).bindPopup('Love River Park');
+        L.marker([22.6163, 120.3129]).addTo(map).bindPopup('Pier-2 Art Center');
+        // Add more markers here
+    </script> -->
+  </body>
+</html>

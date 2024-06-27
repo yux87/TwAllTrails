@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hiking Trails Listing</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <!-- noUiSlider -->
+  <link href="https://cdn.jsdelivr.net/npm/nouislider/distribute/nouislider.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/nouislider/distribute/nouislider.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+    }
+    /* Custom styles can be added here if needed */
+  </style>
+</head>
+<body class="bg-gray-50">
+<iframe src="/partials/header.html" width="100%" height="220px"></iframe>
+  <div class="container mx-auto my-8 p-4">
+    <div class="flex gap-6">
+      
+      <!-- Sidebar Filters -->
+      <div class="w-1/4 h-1/4 bg-white p-4 rounded shadow">
+        <h2 class="font-bold text-lg mb-4">條件搜索</h2>
+        <button @click="callFind" class="p-2 bg-blue-500 text-white rounded">顯示全部</button>
+        <button @click="fetchAndFilterLikedTrails" class="p-2 bg-pink-500 text-white rounded">♥ 已收藏</button>
+        <!-- Filters would go here -->
+        <!-- Main Category Filter -->
+        <br>
+        <br>
+        <div>
+          <h3 class="font-semibold">路徑類別</h3>
+          <div v-for="category in mainCategories" :key="category">
+            <label>
+              <input type="radio" v-model="filters.mainCategories" :value="category"> {{ category }}
+            </label>
+          </div>
+        </div>
+        <br>
+        <!-- Difficulty Level Filter -->
+        <div>
+          <h3 class="font-semibold">困難度等級</h3>
+          <select v-model="filters.difficultyLevel">
+            <option value="">所有等級</option>
+            <option v-for="level in difficultyLevels" :key="level" :value="level">{{ level }}</option>
+          </select>
+        </div>
+        <br>
+        <br>
+        <br>
+         <!-- Slider for Length Range -->
+        <h3 class="font-semibold">公里數</h3>
+        <br>
+        <br>
+        <br>
+        <div id="lengthSlider" class="slider"></div>
+        <!-- Other filters here -->
+      </div>
+
+      <!-- Main Content -->
+      <div class="w-3/4">
+        <div class="mb-4">
+          <input type="text" placeholder="Search trails..." v-model="searchQuery" class="w-full p-2 rounded border border-gray-200">
+
+
+        <!-- Trails Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Trail Card -->
+          <!-- Repeat this block for each trail -->
+          <div class="bg-white rounded-lg shadow overflow-hidden" v-for="trail in filteredTrails" :key="trail.name">
+            <img :src="trail.photo" alt="Trail Image" class="w-full h-32 sm:h-48 object-cover" @click="toAnotherPage(trail.id)">
+            <div class="p-4">
+              <h3 class="font-bold text-lg mb-2" @click="toAnotherPage(trail.id)">{{ trail.name }}</h3>
+              <div class="flex items-center mb-2">
+                <span class="text-yellow-400 text-xs mr-2">{{ trail.rating }}</span>
+                <span class="text-gray-600 text-sm">({{ trail.reviews }} Reviews)</span>
+              </div>
+              <p class="text-gray-700 text-sm mb-2">{{ trail.description }}</p>
+              <div class="flex justify-between items-center text-gray-600 text-sm">
+                <span>{{ trail.trailClass }}</span>
+                <span>{{ trail.tour }}</span>
+                <span>{{ trail.length }}</span>
+                <span><button
+                  type="button"
+                  class="text-red-500 hover:text-red-600"
+                  @click="likedTrail(trail)"
+                >
+                  ♥ Liked {{ trail.liked }}
+                </button></span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- End Trail Card -->
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <script src="https://www.unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <script src="../../../js/trail/fetchLikedTrail.js"></script>
+
+  <script>
+    new Vue({
+      el: '.container', // This targets the main app container
+      data: {
+        trails: [
+          // {
+          //   name: 'Trail dkflsdk',
+          //   rating: '★★★★☆',
+          //   reviews: 123,
+          //   description: 'Trail description and details would go here.',
+          //   duration: '3-5 hours',
+          //   distance: '10 km',
+          //   imageUrl: 'https://via.placeholder.com/350x150'
+          // },
+          // Add more trails here
+        ],
+        toInsertLike:[],
+        sharedText: "",
+
+        //fileter 相關 data
+        searchQuery: '',
+        filters: {
+          mainCategories: [],
+          difficultyLevel: '',
+          minLength: 0,
+          maxLength: 10
+        },
+        mainCategories: ['國家級步道','區域級步道','其它', /* other categories here */],
+        difficultyLevels: ['1', '2', '3', /* etc. */],
+        member: null
+      },
+      methods: {
+        async getMember(){
+          try {
+            const response = await axios.get('/getUserProfiles');
+            const member = response.data; // 獲取伺服器返回的會員物件
+            this.member = member;
+            // console.log(this.member)
+            const nickname = member.nickname; // 從會員物件中提取 nickname 屬性
+            const memberid = member.memberid; // 從會員物件中提取 memberid 屬性
+            // console.log('獲取會員信息成功，會員id為:', memberid);
+
+            if(memberid == null) {
+              console.log("請先登入");
+              return;
+            }
+            } catch (error) {
+              console.error('獲取會員信息失敗:', error);
+              // 處理錯誤情況
+              return; // Exit if there was an error fetching member info
+            }
+        },
+        applyLikedTrailsFilter() {
+    // You could either filter the trails array directly or set a flag to indicate filtering should be based on likes
+    this.trails = this.trails.filter(trail => this.likedTrails.includes(trail.id));
+  },
+        fetchAndFilterLikedTrails() {
+          axios.get("/findLikedTrailByMid?mid="+this.member.memberid)
+            .then(response => {
+              console.log(response)
+              const likedTrailIds = response.data.map(trail => trail.tid); // Get liked trail IDs
+              this.likedTrails = likedTrailIds;
+              this.applyLikedTrailsFilter(); // Apply filter based on liked trails
+            })
+            .catch(error => console.error('Error fetching liked trails:', error));
+        },
+        toAnotherPage(trailId) {
+            window.location.href = `/toDetailPage?id=${trailId}`;
+          },
+        async likedTrail(trail) {
+            // console.log("tid: "+trail.id);
+
+            //先取得會員id
+            try {
+              const response = await axios.get('/getUserProfiles');
+              const member = response.data; // 獲取伺服器返回的會員物件
+              const nickname = member.nickname; // 從會員物件中提取 nickname 屬性
+              const memberid = member.memberid; // 從會員物件中提取 memberid 屬性
+              // console.log('獲取會員信息成功，會員id為:', memberid);
+
+              if(memberid == null) {
+                console.log("請先登入");
+                return;
+              }
+
+              //將tid和mid 放入一個物件
+              if(this.toInsertLike != null) this.toInsertLike = [];
+              this.toInsertLike.push({ mid: memberid, tid: trail.id });
+
+              await axios.post('/manageLikedTrails', this.toInsertLike[0]);
+              console.log("insert or delete your liked trail!");
+
+            } catch (error) {
+              console.error('獲取會員信息失敗:', error);
+              // 處理錯誤情況
+              return; // Exit if there was an error fetching member info
+            }
+
+
+            // this.trails.forEach((trail) => {
+            //   window.fetchLikedTrail(trail.id, (data) => {
+            //     const index = this.trails.findIndex((t) => t.id === trail.id);
+            //     if (index !== -1) {
+            //       this.$set(this.trails[index], 'liked', data);
+            //     }
+            //   }, (error) => {
+            //     console.error("An error occurred:", error);
+            //   });
+            // });
+
+            const tid = trail.id;
+            window.fetchLikedTrail(tid, (data) => {
+                      const index = this.trails.findIndex((t) => t.id === tid);
+                      if (index !== -1) {
+                        this.$set(this.trails[index], 'liked', data);
+                      }
+                    }, (error) => {
+                      console.error("An error occurred:", error);
+                    });
+
+          },
+        // Define any methods your app needs here
+        callFind: function () {
+            // console.log("ddd");
+            let url = "/trailDto.controller";
+            axios
+              .get(url)
+              .then((response) => {
+                // console.log("callFind(), response", response.data);
+                this.trails = response.data;
+                console.log(response)
+                // this.photo = response.data[20].photo;
+
+                // After trails data is set, fetch liked status for each trail
+                this.trails.forEach((trail) => {
+                  window.fetchLikedTrail(trail.id, (data) => {
+                    const index = this.trails.findIndex((t) => t.id === trail.id);
+                    if (index !== -1) {
+                      this.$set(this.trails[index], 'liked', data);
+                    }
+                  }, (error) => {
+                    console.error("An error occurred:", error);
+                  });
+                });
+
+
+              })
+              .catch(function (error) {
+                console.log("error", error);
+              });
+          },
+      },
+      computed: {
+        filteredTrails() {
+          return this.trails.filter((trail) => {
+            const matchesMainCategory = !this.filters.mainCategories.length || this.filters.mainCategories.includes(trail.trailClass);
+            const matchesDifficulty = !this.filters.difficultyLevel || this.filters.difficultyLevel === trail.level;
+            // Add more conditions for other filters as needed
+            // Assuming trail.length is a string like '4.1公里', extract the numerical part
+            const trailLength = parseFloat(trail.length);
+            const matchesLength = trailLength >= this.filters.minLength && trailLength <= this.filters.maxLength;
+
+            const matchesSearchQuery = trail.name.toLowerCase().includes(this.searchQuery.toLowerCase());
+
+            return matchesMainCategory && matchesDifficulty && matchesLength && matchesSearchQuery;
+          });
+        },
+      },
+      mounted() {
+          this.callFind(); // 在這裡調用callFind
+          this.getMember();
+          //   this.$refs.input.focus(); // Correctly accessing ref
+
+          // Correctly initializing Bootstrap modal using Vue ref
+          const modalElement = this.$refs.exampleref;
+          if (modalElement) {
+            this.exampleModal = new bootstrap.Modal(modalElement);
+          }
+
+
+
+
+          var vm = this; // Reference to Vue instance for use in callbacks
+          var lengthSlider = document.getElementById('lengthSlider');
+
+          noUiSlider.create(lengthSlider, {
+            start: [0, 10], // Initial range values
+            connect: true, // Display a colored bar between the handles
+            range: {
+                'min': 0,
+                'max': 10 // Adjust max value as needed
+            },
+            tooltips: true, // Show tooltips on handles
+            format: {
+              // Formatting for tooltips
+              to: function(value) {
+                return value.toFixed(1) + ' km'; // Format tooltip text
+              },
+              from: function(value) {
+                return Number(value.replace(' km', ''));
+              }
+            }
+          });
+
+          // When the slider value changes, update Vue data
+          lengthSlider.noUiSlider.on('update', function(values, handle) {
+            vm.filters.minLength = parseFloat(values[0]);
+            vm.filters.maxLength = parseFloat(values[1]);
+          });
+
+
+        },
+    })
+  </script>
+  
+
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Trail Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+<div id="app" class="max-w-4xl mx-auto my-8 bg-white shadow-lg">
+    <div v-if="trail">
+        <!-- Header with Image -->
+        <div class="relative">
+            <img :src="trail.photo" :alt="trail.name" class="w-full h-60 object-cover">
+            <div class="absolute top-4 right-4 space-x-2">
+                <button class="bg-blue-600 text-white p-2 rounded-full">
+                    <span>Share</span>
+                </button>
+                <button @click="navigateToTrail" class="bg-green-600 text-white p-2 rounded-full">
+                    <span>導航</span>
+                </button>
+
+            </div>
+        </div>
+        <!-- Trail Info Section -->
+        <div class="p-6">
+            <h1 class="text-3xl font-bold">{{ trail.name }}</h1>
+            <p class="text-sm">{{ trail.trailClass }}</p>
+            <p class="text-sm">{{ trail.main }}</p>
+            
+            <!-- Quick Info -->
+            <div class="flex justify-between my-4">
+                <div>
+                    <p>里程</p>
+                    <p>{{ trail.length }}</p>
+                </div>
+                <div>
+                    <p>難易度</p>
+                    <p>{{ trail.level }}</p>
+                </div>
+                <div>
+                    <p>步道類型</p>
+                    <p>{{ trail.pave }}</p>
+                </div>
+
+            </div>
+            <p>This 5.1-km loop trail near Gushan, Kaohsiung City. Generally considered a moderately challenging route, it takes an average of 1h 53m to complete. This is a very popular area for backpacking and hiking, so you'll likely encounter other people while exploring. The best times to visit this trail are October through March.
+
+            </p>
+            
+        </div>
+    </div>
+    <div v-else>
+        <p class="p-6">Trail not found.</p>
+    </div>
+</div>
+
+<!-- Import Vue.js and Axios from CDN for simplicity -->
+<script src="https://unpkg.com/vue@3.4.19/dist/vue.global.prod.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script>
+const { createApp } = Vue;
+
+createApp({
+    data() {
+        return {
+            trail: null,
+            currentLocation: { lat: 0, lng: 0 }, // Default to 0,0. Consider a more sensible default.
+        };
+    },
+    methods: {
+        navigateToTrail() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(position => {
+                    const currentLocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    const navigationUrl = `https://www.google.com/maps/dir/?api=1&origin=${currentLocation.lat},${currentLocation.lng}&destination=${this.trail.lat},${this.trail.lng}&travelmode=driving`;
+                    window.open(navigationUrl, '_blank');
+                }, (error) => {
+                    console.error("Geolocation service failed:", error);
+                    // Check if the user denied the geolocation request
+                    if (error.code === error.PERMISSION_DENIED) {
+                        this.showPermissionDeniedMessage();
+                    }
+                });
+            } else {
+                console.error("Browser doesn't support geolocation.");
+            }
+        },
+        showPermissionDeniedMessage() {
+            // Display a user-friendly message. This could be a modal, alert, or a visible HTML element.
+            alert("Geolocation permission has been blocked. Please enable it in your browser settings to use navigation features. For more information, visit: https://support.google.com/chrome/answer/142065");
+        },
+        getTrail() {
+            const params = new URLSearchParams(window.location.search);
+            const trailId = params.get('id');
+
+            let url = `/dto/findTrailById.controller/${trailId}`;
+            axios
+                .get(url)
+                .then(response => {
+                    this.trail = response.data;
+                })
+                .catch(error => {
+                    console.error("Error fetching trail data:", error);
+                });
+        },
+    },
+    mounted() {
+        this.getTrail();
+        this.fetchCurrentLocation();
+    }
+}).mount('#app');
+
+// Include the Google Maps API script
+function initMap() {
+    console.log('Google Maps API initialized');
+}
+
+fetch('/api/google-maps-api-key')
+    .then(response => response.json())
+    .then(data => {
+        const script = document.createElement('script');
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${data.apiKey}&callback=initMap`;
+        script.async = true;
+        script.defer = true;
+        document.head.appendChild(script);
+    })
+    .catch(error => {
+        console.error("Error loading Google Maps API key:", error);
+    });
+</script>
+
+<!-- Include the Google Maps API script. Remember to replace YOUR_API_KEY with your actual Google Maps API key. -->
+<!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=My_Key&callback=initMap"></script>-->
+
+</body>
+</html>

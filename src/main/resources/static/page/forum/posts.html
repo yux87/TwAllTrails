@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>貼文管理中心</title>
+      <link rel="stylesheet" href="../../css/forumIndex.css">
+      <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+      <script src="https://cdn.ckeditor.com/ckeditor5/33.0.0/classic/ckeditor.js"></script>
+       <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        /* Add some basic styling */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .action-btn {
+            padding: 6px 12px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .delete-btn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+        }
+        .edit-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+        .search-container {
+    		position: fixed; /* 固定定位 */
+    		top: 5%; /* 置于顶部 */
+    		left: 50%; /* 左边界置于视口中央 */
+    		transform: translateX(-50%); /* 向左偏移自身宽度的一半，确保居中 */
+    		width: calc(100% - 40px); /* 计算宽度，留出左右边距 */
+    		max-width: 600px; /* 最大宽度，根据需要调整 */
+    		z-index: 1000; /* 确保搜索栏位于页面其他内容之上 */
+    		display: flex; /* 使用Flex布局，方便居中子元素 */
+    		justify-content: center; /* 子元素水平居中 */
+    		padding: 10px 0; /* 添加一些垂直方向的内边距 */
+    		box-sizing: border-box; /* 确保边框和内边距不增加宽度 */
+		}
+    </style>
+</head>
+<body>
+	<div class="search-container">
+    <input type="text" class="search-input" id="searchInput" placeholder="搜尋...">
+    <button class="search-button" onclick="searchThreads()">搜尋</button>
+</div>
+<iframe src="/partials/header.html" width="100%" height="220px"></iframe>
+    <h2>貼文管理中心</h2>
+    <table id="threadTable">
+        <thead>
+            <tr>
+                <th>文章ID</th>
+                <th>分類</th>
+                <th>標題</th>
+                <th>內容</th>
+                <th>發文日期</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="threadTableBody">
+            <!-- Data will be inserted here dynamically -->
+        </tbody>
+    </table>
+
+    <!-- Form for adding/editing a thread (initially hidden) -->
+    <div id="threadForm" style="display: none;">
+    <h2 id="formTitle">New Thread</h2>
+    <form id="addEditThreadForm">
+        <input type="hidden" id="threadId" name="threadId">
+        <label for="title">Title:</label><br>
+        <input type="text" id="title" name="title"><br>
+        <label for="content">Content:</label><br>
+        <textarea id="content" name="content"></textarea><br><br>
+        <input type="button" value="更新" onclick="updateThread()">
+    </form>
+</div>
+
+    
+<iframe src="/partials/footer.html" width="100%" height="400px"></iframe>
+
+    <script>
+	var currentMemberId;
+    window.onload = async function () {
+        // 發送 GET 請求
+        const response = await axios.get('/getUserProfiles');
+        const memberid = response.data.memberid;
+        // 根據響應結果導向不同的頁面
+        if (memberid != null) {
+            // 導向會員頁面
+            console.log('導向會員頁面');
+
+            // 保存 memberid，以便其他函數使用
+            currentMemberId = memberid; // 把 memberId 存到全局變量
+			console.log('currentMemberId:', currentMemberId); // 添加这行进行调试
+            // 用戶已登入，現在可以根據 memberId 抓取相關貼文
+            fetchData(); // 確保 fetchData 在 memberId 被賦值後調用
+        } else {
+            // 導向登入頁面
+            Swal.fire({
+                title: "警告!",
+                text: "在看到發表過的貼文前，您要記得先登入帳號呦~",
+                icon: "warning",
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: '確定',
+                didClose: () => {
+                    // 用户点击确定后执行页面跳转
+                    window.location.href = `/login`; // 替换为实际的 category 名称属性
+                }
+        });
+            console.log('導向登入頁面');
+        }
+    }
+    function searchThreads() {
+        const searchKeyword = document.getElementById('searchInput').value;
+        console.log('Search keyword:', searchKeyword);
+
+        if (!searchKeyword.trim()) {
+            Swal.fire({
+                title: "警告!",
+                text: "請輸入搜尋關鍵字",
+                icon: "error",
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: '確定',
+            });
+            fetchData();
+        }
+
+        console.log('Fetching threads for member ID:', currentMemberId);
+        fetch(`/threads/member/${currentMemberId}?keyword=${encodeURIComponent(searchKeyword)}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log('Received search results:', data);
+                updateTableWithThreads(data); // 使用搜索结果更新表格
+            })
+            .catch(error => console.error('Error searching threads:', error));
+    }
+
+
+        			function updateTableWithThreads(data) {
+        		    const tableBody = document.getElementById('threadTableBody');
+        		    tableBody.innerHTML = ''; // 清空现有的表格数据
+
+        		    if (data.length === 0) {
+        		        const row = document.createElement('tr');
+        		        row.innerHTML = `<td colspan="6" style="text-align: center;">找不到相關貼文</td>`;
+        		        tableBody.appendChild(row);
+        		    } else {
+        		        data.forEach(thread => {
+        					let displayContent = thread.content;
+        		                        if (displayContent.length > 43) {
+        		                            displayContent = displayContent.substring(0, 43) + '...';
+        		                        }
+        		            const row = document.createElement('tr');
+        		            row.innerHTML = `
+        		                <td>${thread.threadid}</td>
+        		                <td>${thread.category.categoryname}</td> 
+        		                <td>${thread.title}</td>
+        		                <td>${displayContent}</td> 
+        		                <td>${thread.createdate}</td>
+        		                <td>
+        		                    <button class="action-btn edit-btn" onclick="editThread(${thread.threadid})">Edit</button>
+        		                    <button class="action-btn delete-btn" onclick="deleteThread(${thread.threadid})">Delete</button>
+        		                </td>
+        		            `;
+        		            tableBody.appendChild(row);
+        		        });
+        		    }
+        		}
+    
+    // 根據 memberId 动态获取数据
+    function fetchData() {
+        if (currentMemberId) {
+        fetch(`/threads/member/${currentMemberId}`)
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.getElementById('threadTableBody');
+                tableBody.innerHTML = ''; // 清空现有的表格数据
+
+                if (data.length === 0) {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `<td colspan="6" style="text-align: center;">尚無貼文，快發表文章與大家交流吧~~</td>`;
+                    tableBody.appendChild(row);
+                } else {
+                    data.forEach(thread => {
+                        let displayContent = thread.content;
+                        if (displayContent.length > 43) {
+                            displayContent = displayContent.substring(0, 43) + '...';
+                        }
+
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${thread.threadid}</td>
+                            <td>${thread.category.categoryname}</td>
+                            <td>${thread.title}</td>
+                            <td>${displayContent}</td>
+                            <td>${thread.createdate}</td>
+                            <td>
+                                <button class="action-btn edit-btn" onclick="editThread(${thread.threadid})">Edit</button>
+                                <button class="action-btn delete-btn" onclick="deleteThread(${thread.threadid})">Delete</button>
+                            </td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+                }
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    } else {
+        console.error('currentMemberId is invalid');
+    }
+}
+
+
+
+
+        // Delete thread by ID
+        function deleteThread(threadId) {
+            fetch(`/threads/${threadId}`, { method: 'DELETE' })
+                .then(() => {
+                    // Refresh data after deletion
+                    fetchData();
+                })
+                .catch(error => console.error('Error deleting thread:', error));
+        }
+
+     // 定義一個全局的 CKEditor 實例變量
+        let editorInstance;
+
+        function editThread(threadId) {
+            fetch(`/threads/${threadId}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('formTitle').textContent = 'Edit Thread';
+                    document.getElementById('threadId').value = data.threadid;
+                    document.getElementById('title').value = data.title;
+                    
+                    // 檢查是否已經存在 CKEditor 實例，如果不存在則創建新的實例
+                    if (!editorInstance) {
+                        ClassicEditor.create(document.querySelector('#content'))
+                            .then(editor => {
+                                editorInstance = editor;
+                                // 設置編輯器的內容
+                                editor.setData(data.content);
+                            })
+                            .catch(error => {
+                                console.error(error);
+                            });
+                    } else {
+                        // 如果已經存在 CKEditor 實例，則直接設置內容
+                        editorInstance.setData(data.content);
+                    }
+
+                    document.getElementById('threadForm').style.display = 'block';
+                })
+                .catch(error => console.error('Error fetching thread details:', error));
+        }
+
+        function updateThread() {
+            const threadId = document.getElementById('threadId').value;
+            const title = document.getElementById('title').value;
+            const content = editorInstance.getData(); // 使用CKEditor提供的API获取内容
+
+            fetch(`/threads/update/${threadId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ title, content })
+            })
+            .then(response => {
+                if (response.ok) {
+                    Swal.fire({
+                        title: "Good job!",
+                        text: "更新成功！",
+                        icon: "success",
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: '確定',
+                });
+                    document.getElementById('threadForm').style.display = 'none';
+                    fetchData(); // 重新加载数据以显示最新的列表
+                } else {
+                    Swal.fire({
+                        title: "錯誤!",
+                        text: "更新失败，请稍後重试。",
+                        icon: "error",
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: '確定',
+                });
+                }
+            })
+            .catch(error => console.error('Error updating thread:', error));
+        }
+
+
+        // Fetch data when the page loads
+        fetchData();
+
+    </script>
+</body>
+</html>

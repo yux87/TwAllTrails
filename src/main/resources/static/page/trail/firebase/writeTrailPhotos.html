@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://www.unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+
+  </head>
+  <body>
+
+<!-- showImage   -->
+<div id="app">
+  <input type="file" @change="uploadImage" multiple />
+  <br /><br /><br /><br />
+  <div v-for="url in imageUrls" :key="url">
+    <img :src="url" alt="Image from Firebase" />
+  </div>
+</div>
+
+
+
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics.js";
+      import {
+        getStorage,
+        ref,
+        uploadBytes,
+        getDownloadURL,
+      } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-storage.js";
+
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyBgj0UQl3hLIoppfnSzHXv8L5MKTeaYfGA",
+        authDomain: "fir-web-dffc1.firebaseapp.com",
+        projectId: "fir-web-dffc1",
+        storageBucket: "fir-web-dffc1.appspot.com",
+        messagingSenderId: "895111528200",
+        appId: "1:895111528200:web:8954aa09a5fd133f1b76bd",
+        measurementId: "G-LTRTDGDF8G",
+      };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const storage = getStorage(app);
+
+  // Vue application
+  new Vue({
+    el: '#app',
+    data() {
+  return {
+    imageUrls: [], // Now an array to store multiple image URLs
+  };
+},
+methods: {
+  async uploadImage(event) {
+    const files = event.target.files;
+    if (files.length === 0) {
+      console.log('No files selected.');
+      return;
+    }
+    for (let i = 0; i < files.length; i++) {
+      const imageFile = files[i];
+      const storageRef = ref(storage, 'images/' + imageFile.name);
+      try {
+        await uploadBytes(storageRef, imageFile);
+        this.displayImage(imageFile.name);
+      } catch (error) {
+        console.error('Upload failed for ' + imageFile.name, error);
+      }
+    }
+  },
+    displayImage(imageName) {
+      const storageRef = ref(storage, 'images/' + imageName);
+      getDownloadURL(storageRef)
+        .then((url) => {
+          this.imageUrls.push(url); // Push each image URL to the array
+
+          // Construct the request object
+          const request = { photo: url };
+
+
+          // console.log("imageName:"+imageName)
+
+          let filenameWithoutExtension = imageName.split('.').slice(0, -1).join('.');
+          console.log(filenameWithoutExtension);
+
+
+
+          // Define your API endpoint
+          let controllerUrl = "/dto/updateDtoPhotoByTname/" + filenameWithoutExtension;
+
+          // Make the PUT request
+          axios
+            .put(controllerUrl, request)
+            .then((response) => {
+              console.log('Update successful', response);
+            })
+            .catch(function (error) {
+              console.error('Error updating DTO:', error);
+            });
+
+
+        })
+        .catch((error) => {
+          console.error('Error loading image:', error);
+        });
+    },
+    },
+    mounted() {
+      // If you want to display an image right after loading
+      // this.displayImage('image06.jpg');
+    },
+  });
+</script>
+  </body>
+</html>

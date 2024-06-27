@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>我的訂單</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"/>
+  <script src="https://unpkg.com/vue@3"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<iframe src="/partials/header.html" width="100%" height="220px"></iframe>
+<div id="orders-app" class="ui container">
+  <h1 class="ui header">我的訂單</h1>
+  <div class="ui cards" v-for="order in orders" :key="order.orderId">
+    <div class="card">
+      <div class="content">
+        <div class="header">訂單編號：{{ order.orderId }}</div>
+        <div class="meta">訂單日期：{{ new Date(order.createdDate).toLocaleString() }}</div>
+        <div class="description">
+          <p>總金額：{{ order.totalAmount }}</p>
+          <p>收件人姓名：{{ order.receiverName }}</p>
+          <p>收件人地址：{{ order.receiverAddress }}</p>
+          <p>收件人電話：{{ order.receiverPhone }}</p>
+          <p>電子郵件：{{ order.receiverEmail }}</p>
+          <button class="ui button" @click="toggle(order)">查看詳細</button>
+        </div>
+      </div>
+      <div class="extra content" v-if="activeOrder === order.orderId">
+        <div v-for="item in order.orderItemList" :key="item.orderItemId">
+          {{ item.productName }} - 數量：{{ item.quantity }} - 小計：{{ item.amount }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const { createApp, ref } = Vue;
+
+  const app = createApp({
+    setup() {
+      const orders = ref([]);
+      const activeOrder = ref(null);
+
+      // 從後端獲取訂單資料的函數
+      const fetchOrders = async (userId) => {
+        try {
+          // 在請求中添加令牌來驗證用戶身份
+          const response = await axios.get(`/users/${userId}/orders`);
+          orders.value = response.data.results;
+        } catch (error) {
+          console.error("獲取訂單資料時發生錯誤:", error);
+        }
+      };
+
+      // 展開或折疊訂單詳細資訊的函數
+      const toggle = (order) => {
+        activeOrder.value = activeOrder.value === order.orderId ? null : order.orderId;
+      };
+
+      // 從登入狀態獲取真實用戶ID
+      axios.get('/getUserProfiles')
+              .then(response => {
+                const member = response.data; // 獲取服務器返回的會員物件
+                const memberid = member.memberid; // 從會員物件中提取 memberid 屬性
+                console.log('獲取會員資訊成功,會員id為:', memberid);
+
+                // 使用從登入狀態獲得的真實用戶ID來獲取訂單
+                fetchOrders(memberid);
+              })
+              .catch(error => {
+                console.error('獲取會員資訊失敗:', error);
+              });
+
+      return {
+        orders,
+        activeOrder,
+        toggle
+      };
+    },
+  });
+
+  app.mount("#orders-app");
+</script>
+</body>
+</html>

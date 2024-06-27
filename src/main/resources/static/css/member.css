@@ -1,0 +1,11 @@
+#avatar {
+    width: 330px;
+    height: 280px;
+    border: 2px solid #ccc; /* 邊框顏色和寬度可調整 */
+    border-radius: 50%;
+    overflow: hidden;
+    object-fit: cover;
+}
+button,img{
+    user-select: none;
+}

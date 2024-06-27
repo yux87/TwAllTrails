@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    header {
+      background: #1E40AF;
+    }
+
+
+    nav a, .dropdown-content a {
+      color: white;
+    }
+
+    nav a.dropbtn:hover, .dropdown-content a:hover {
+      background-color: #0d6efd;
+    }
+
+
+    nav a.active {
+      background-color: #4C51BF;
+      border-radius: 0.25rem;
+    }
+  </style>
+  <meta charset="UTF-8">
+  <title>商品詳情</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/index.css">
+  <script src="https://unpkg.com/vue@3"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+
+<iframe src="/partials/header.html" width="100%" height="220px"></iframe>
+
+
+<div id="product-app" class="container">
+  <div class="container mt-3">
+    <div class="mb-3">
+      <form @submit.prevent="fetchProducts" class="form-inline">
+        <input type="text" v-model="searchQuery.search" placeholder="輸入產品名稱搜尋" class="form-control mr-2" />
+        <select v-model="searchQuery.category" class="form-control mr-2">
+          <option value="">所有類別</option>
+          <option value="露營裝備">露營裝備</option>
+          <option value="FOOD">食品</option>
+          <option value="登山裝備">登山裝備</option>
+        </select>
+        <button type="submit" class="btn btn-primary">搜尋</button>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <img :src="product.imageUrl" alt="商品圖片" class="img-fluid">
+    </div>
+    <div class="col-md-6">
+      <h1>{{ product.productName }}</h1>
+      <p class="lead">類別: {{ product.category }}</p>
+      <p class="lead">價格: {{ product.price }}</p>
+      <p class="lead">庫存: {{ product.stock }}</p>
+      <p>描述: {{ product.description }}</p>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <button class="btn btn-outline-secondary" type="button" @click="decrementQuantity" :disabled="quantity <= 1">-</button>
+        </div>
+        <input type="number" class="form-control" v-model.number="quantity">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button" @click="incrementQuantity" :disabled="quantity >= product.stock">+</button>
+        </div>
+      </div>
+      <button @click="addToCart(product, quantity)" class="btn btn-primary btn-lg">加入購物車</button>
+    </div>
+  </div>
+
+  <h2 class="mt-4">其他商品</h2>
+  <div class="row">
+    <div v-for="otherProduct in otherProducts" :key="otherProduct.productId" class="col-md-3 mb-3">
+      <div class="card">
+        <img :src="otherProduct.imageUrl" alt="商品圖片" class="card-img-top" style="height: 150px; object-fit: cover;">
+        <div class="card-body">
+          <h5 class="card-title">{{ otherProduct.productName }}</h5>
+          <p class="card-text">{{ otherProduct.price }}</p>
+          <a :href="`/mall/product?id=${otherProduct.productId}`" class="btn btn-primary">查看詳情</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="addToCartModal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">商品已添加到購物車</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>商品已成功添加到購物車!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" @click="continueShopping">繼續購物</button>
+        <button type="button" class="btn btn-success" @click="goToCart">去購物車結算</button>
+      </div>
+    </div>
+  </div>
+</div>
+<iframe src="/partials/footer.html" width="100%" height="400px"></iframe>
+<script>
+  const { createApp, ref, onMounted } = Vue;
+
+  const app = createApp({
+    setup() {
+      const product = ref({});
+      const quantity = ref(1);
+      const otherProducts = ref([]);
+      const searchQuery = ref({
+        search: '',
+        category: ''
+      });
+
+      const fetchProducts = async () => {
+        try {
+          let url = '/products';
+          if (searchQuery.value.search || searchQuery.value.category) {
+            url += '?';
+            if (searchQuery.value.search) {
+              url += `search=${searchQuery.value.search}&`;
+            }
+            if (searchQuery.value.category) {
+              url += `category=${searchQuery.value.category}`;
+            }
+          }
+          const response = await axios.get(url);
+          otherProducts.value = response.data.filter(p => p.productId !== product.value.productId);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
+
+
+      const fetchProduct = async () => {
+        const productId = new URLSearchParams(window.location.search).get("id");
+        const response = await axios.get(`/products/${productId}`);
+        product.value = response.data;
+      };
+
+      const fetchOtherProducts = async () => {
+        const response = await axios.get('/products');
+        otherProducts.value = response.data.filter(p => p.productId !== product.value.productId);
+      };
+
+      const addToCart = (product, quantity) => {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const existingProduct = cart.find((item) => item.productId === product.productId);
+        if (existingProduct) {
+          existingProduct.quantity += quantity;
+        } else {
+          cart.push({ ...product, quantity });
+        }
+        localStorage.setItem("cart", JSON.stringify(cart));
+        alert(`${quantity} 件商品已加入購物車`);
+
+        // 更新購物車商品數量
+        const cartCountElement = document.getElementById('cartCount');
+        cartCountElement.textContent = cart.length;
+
+// 顯示模態框
+        $('#addToCartModal').modal('show');
+      };
+
+      const incrementQuantity = () => {
+        if (quantity.value < product.value.stock) {
+          quantity.value++;
+        }
+      };
+
+      const decrementQuantity = () => {
+        if (quantity.value > 1) {
+          quantity.value--;
+        }
+      };
+
+      onMounted(() => {
+        fetchProduct();
+        fetchOtherProducts();
+      });
+
+      return {
+        product,
+        quantity,
+        addToCart,
+        incrementQuantity,
+        decrementQuantity,
+        otherProducts,
+        searchQuery,
+        fetchProducts
+      };
+    },
+  });
+
+  app.mount("#product-app");
+</script>
+<script src="../js/index.js"></script>
+<script type="text/javascript">
+  </body>
+  <style>
+    header {
+    background: #1E40AF;
+  }
+
+
+
+
+    nav a, .dropdown-content a {
+    color: white;
+  }
+
+    nav a.dropbtn:hover, .dropdown-content a:hover {
+          background-color: #0d6efd;
+  }
+
+
+    nav a.active {
+          background-color: #4C51BF;
+    border-radius: 0.25rem;
+  }
+  </style>
+  </html>

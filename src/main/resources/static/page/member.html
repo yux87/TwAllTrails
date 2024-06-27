@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <!--  匯入Bootstrap-->
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+            crossorigin="anonymous"
+    />
+    <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+            crossorigin="anonymous"
+    ></script>
+    <!--  匯入Axios-->
+    <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+    <!--  匯入SweetAlert2-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!--匯入Vue-->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<!--    匯入base64js-->
+    <script src="https://unpkg.com/base64-js@1.5.1/base64js.min.js"></script>
+    <!--  匯入CKEditor-->
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.2.1/classic/ckeditor.js"></script>
+    <!--  匯入CSS-->
+    <link rel="stylesheet" href="../css/member.css" />
+    <title>會員中心</title>
+</head>
+<body>
+<!--iframe header-->
+<!--<iframe src="/partials/header.html" width="100%" height="80px"></iframe>-->
+
+<div id="embedded-content"></div>
+<script>
+    // 獲取另一个 HTML 文件的 URL
+    var anotherHtmlUrl = '/partials/header.html';
+
+    // 發起 fetch 請求 HTML 文件的内容
+    fetch(anotherHtmlUrl)
+        .then(response => {
+            // 检查响应的状态
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text(); // 將回應內容解析成文本
+        })
+        .then(htmlContent => {
+            // 獲取並插入内容或元素
+            var embeddedContent = document.getElementById("embedded-content");
+            embeddedContent.innerHTML = htmlContent;
+        })
+        .catch(error => {
+            console.error('There was a problem with your fetch operation:', error);
+        });
+</script>
+
+<div class="d-flex justify-content-center">
+    <div>
+        <h3 class="mt-5 mb-5 text-center" id="hello-h3">您好！</h3>
+        <hr>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="" class="img-thumbnail" id="avatar" alt="會員頭像" onclick="ShowUpload()">
+<!--                        <button type="button" class="btn btn-sm btn-outline-primary" id="avatar-upload-btn" onclick="ShowUpload()">上傳頭像</button>-->
+                        <br>
+        <h5>點擊可修改資料</h5>
+                        <span id="fileSizeError" style="color: red;"> </span>
+                        <input type="file" class="form-control form-control-sm" id="avatar-upload-input" accept="image/*" style="display: none;">
+        <button type="button" class="btn btn-danger" id="reset-password-btn" style="margin: 4px" onclick=confirmResetPassword()>重設密碼</button>
+        <button type="button" class="btn btn-secondary" style="margin: 4px auto;" onclick=confirmLogout()>登出</button>
+                    </div>
+                    <div class="col-md-8">
+                        <table class="table table-bordered table-hover">
+                            <tbody>
+                            <tr>
+                                <th>帳號</th>
+                                <td id="username" onclick="changeUsername()"></td>
+                            </tr>
+                            <tr>
+                                <th>暱稱</th>
+                                <td id="nickname" onclick="changeNickname()"></td>
+                            </tr>
+                            <tr>
+                                <th>生日</th>
+                                <td id="birthday" onclick="changeBirthday()"></td>
+                            </tr>
+                            <tr>
+                                <th>電話</th>
+                                <td id="phone" onclick="changePhone()"></td>
+                            </tr>
+                            <tr>
+                                <th>密碼</th>
+                                <td id="password" onclick="confirmResetPassword()"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <p class="text-center" id="signature">個人簽名</p>
+                        <div id="editor"></div>
+<!--                        <button type="button" class="btn btn-primary" id="save-btn" style="margin: 4px" onclick="saveData()">儲存</button>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+<!--        按鈕：修改暱稱,重設密碼和登出-->
+<!--        <button type="button" class="btn btn-primary" id="change-nickname-btn" style="margin: 4px" onclick="changeNickname()">修改暱稱</button>-->
+<!--        <button type="button" class="btn btn-primary" id="change-birthday-btn" style="margin: 4px" onclick="changeBirthday()">修改生日</button>-->
+<!--        <button type="button" class="btn btn-primary" id="change-phone-btn" style="margin: 4px" onclick="changePhone()">修改電話</button>-->
+
+    </div>
+</div>
+<br><br>
+<!--iframe footer-->
+<iframe src="/partials/footer.html" width="100%" height="400px"></iframe>
+<!--  匯入JS-->
+<script src="../js/member.js"></script>
+</body>
+</html>

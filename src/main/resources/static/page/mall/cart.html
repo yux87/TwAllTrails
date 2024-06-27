@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>購物車</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://unpkg.com/vue@3"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <!-- 引入 PayPal JavaScript SDK -->
+  <script src="https://www.paypal.com/sdk/js?client-id=AXq5heL_hNFxqFkQH-bjRLoTk3NBwpv-9_maF96jWXPYGjDj7h6m7kGVY-oSgB446mPDui9yFHgwtgfh&currency=TWD"></script>
+</head>
+<body>
+
+<iframe src="/partials/header.html" width="100%" height="220px"></iframe>
+
+<div id="app" class="container mt-4">
+  <h1>購物車</h1>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>商品</th>
+      <th>價格</th>
+      <th>數量</th>
+      <th>小計</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr v-for="item in cart" :key="item.productId">
+      <td>
+        <div class="d-flex align-items-center">
+          <img :src="item.imageUrl" :alt="item.productName" class="mr-2" style="width: 50px; height: 50px" />
+          {{ item.productName }}
+        </div>
+      </td>
+      <td>{{ item.price }}</td>
+      <td>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <button class="btn btn-outline-secondary" @click="decrementQuantity(item)" :disabled="item.quantity <= 1">-</button>
+          </div>
+          <input type="text" class="form-control" v-model.number="item.quantity" readonly />
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" @click="incrementQuantity(item)" :disabled="item.quantity >= item.stock">+</button>
+          </div>
+        </div>
+      </td>
+      <td>{{ item.quantity * item.price }}</td>
+      <td>
+        <button class="btn btn-danger" @click="removeFromCart(item)">移除</button>
+      </td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+      <td colspan="3" class="text-right">總計:</td>
+      <td>{{ totalAmount }}</td>
+      <td></td>
+    </tr>
+    </tfoot>
+  </table>
+  <div class="text-right">
+    <button class="btn btn-secondary" @click="continueShopping">繼續購物</button>
+  </div>
+  <div class="mt-4">
+    <h3>送貨資訊</h3>
+    <form @submit.prevent="submitOrder">
+      <div class="form-group">
+        <label for="name">收件人姓名</label>
+        <input type="text" class="form-control" id="name" v-model="deliveryInfo.name" required>
+      </div>
+      <div class="form-group">
+        <label for="address">收件人地址</label>
+        <input type="text" class="form-control" id="address" v-model="deliveryInfo.address" required>
+      </div>
+      <div class="form-group">
+        <label for="phone">收件人電話</label>
+        <input type="tel" class="form-control" id="phone" v-model="deliveryInfo.phone" required>
+      </div>
+      <div class="form-group">
+        <label for="email">電子郵件地址</label>
+        <input type="email" class="form-control" id="email" v-model="deliveryInfo.email" required>
+      </div>
+      <!-- PayPal 按鈕容器 -->
+      <div id="paypal-button-container"></div>
+    </form>
+  </div>
+</div>
+<iframe src="/partials/footer.html" width="100%" height="400px"></iframe>
+<script>
+  const { createApp, ref, onMounted, computed } = Vue;
+
+  const app = createApp({
+    setup() {
+      const cart = ref([]);
+      const deliveryInfo = ref({
+        name: '',
+        address: '',
+        phone: '',
+        email: '',
+      });
+      const totalAmount = computed(() => {
+        return cart.value.reduce((total, item) => total + item.quantity * item.price, 0);
+      });
+      const incrementQuantity = (item) => {
+        if (item.quantity < item.stock) {
+          item.quantity++;
+        }
+      };
+      const decrementQuantity = (item) => {
+        if (item.quantity > 1) {
+          item.quantity--;
+        }
+      };
+      const removeFromCart = (item) => {
+        cart.value = cart.value.filter((i) => i.productId !== item.productId);
+        localStorage.setItem("cart", JSON.stringify(cart.value));
+      };
+      const submitOrder = async () => {
+        try {
+          const userResponse = await axios.get('/getUserProfiles');
+          const userId = userResponse.data.memberid;
+
+          const createOrderRequest = {
+            buyItemList: cart.value.map((item) => ({
+              productId: item.productId,
+              quantity: item.quantity,
+            })),
+            deliveryInfo: deliveryInfo.value,
+          };
+
+          const orderResponse = await axios.post(
+                  `/users/${userId}/orders`,
+                  createOrderRequest
+          );
+          console.log("訂單已提交:", orderResponse.data);
+          cart.value = [];
+          localStorage.removeItem("cart");
+          alert("訂單已成功提交!");
+
+          // 在訂單成功提交後跳轉到 orders.html 頁面
+          window.location.href = "/mall/order";
+        } catch (error) {
+          console.error("提交訂單時發生錯誤:", error);
+          alert("提交訂單時發生錯誤,請重試。");
+        }
+      };
+
+      onMounted(() => {
+        const cartFromStorage = JSON.parse(localStorage.getItem("cart")) || [];
+        cart.value = cartFromStorage;
+
+        // 在 onMounted 鉤子中初始化 PayPal 按鈕
+        paypal.Buttons({
+          createOrder: function(data, actions) {
+            return actions.order.create({
+              purchase_units: [{
+                amount: {
+                  value: totalAmount.value // 現在可以訪問 totalAmount 計算屬性
+                }
+              }]
+            });
+          },
+          onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details) {
+              console.log('Payment successful:', details);
+              submitOrder(); // 在支付成功後提交訂單
+            });
+          }
+        }).render('#paypal-button-container');
+      });
+
+      return {
+        cart,
+        deliveryInfo,
+        totalAmount,
+        incrementQuantity,
+        decrementQuantity,
+        removeFromCart,
+        submitOrder,
+      };
+    },
+  });
+
+  app.mount("#app");
+</script>
+<script>
+  // 檢查會員 ID，如果為 2 則顯示商品管理選項
+  axios.get('/getUserProfiles').then(response => {
+    const member = response.data;
+    if (member.memberid === 2) {
+      document.getElementById('productManagementNavItem').style.display = 'block';
+    }
+  }).catch(error => {
+    console.error('獲取會員信息失敗:', error);
+  });
+</script>
+</body>
+</html>

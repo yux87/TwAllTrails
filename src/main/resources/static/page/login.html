@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!--  匯入Bootstrap-->
+  <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+          crossorigin="anonymous"
+  />
+  <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+          crossorigin="anonymous"
+  ></script>
+<!--  匯入Axios-->
+  <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+<!--  匯入SweetAlert2-->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!--  匯入Vue-->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<!--  匯入CSS-->
+  <link rel="stylesheet" href="../css/login.css" />
+  <title>Login 登入頁面</title>
+</head>
+<body>
+
+<div class="section">
+  <div class="container">
+    <div class="row full-height justify-content-center">
+      <div class="col-12 text-center align-self-center py-5">
+        <div class="section pb-5 pt-5 pt-sm-2 text-center">
+          <h6 class="mb-0 pb-3">
+            <span>登入 </span><span>註冊 </span>
+          </h6>
+          <input
+                  class="checkbox"
+                  type="checkbox"
+                  id="reg-log"
+                  name="reg-log"
+          />
+          <label for="reg-log"></label>
+          <div class="card-3d-wrap mx-auto">
+            <div class="card-3d-wrapper">
+              <div class="card-front">
+                <div class="center-wrap">
+                  <div class="section text-center">
+                    <h4 class="mb-4 pb-1">Log In</h4>
+                    <form action="/login" method="post">
+                      <div class="form-group">
+                        <input
+                                type="text"
+                                name="username"
+                                class="form-style"
+                                placeholder="信箱 Email"
+                                id="username-l"
+                                autocomplete="off"
+                        />
+                        <span id="mail-error-l" class="text-danger"></span>
+                        <i class="input-icon uil uil-at"></i>
+                      </div>
+                      <div class="form-group mt-2">
+                        <input
+                                type="password"
+                                name="password"
+                                class="form-style"
+                                placeholder="密碼 Password"
+                                id="password-l"
+                                autocomplete="off"
+                        />
+                        <div class="form-group mt-2">
+                          <input type="checkbox" id="remember-me" name="remember-me" checked>
+                          <label for="remember-me">記住我 (Remember Me)</label>
+                        </div>
+                        <i class="input-icon uil uil-lock-alt"></i>
+                      </div>
+                      <button type="submit" class="btn mt-4">登入</button>
+                    </form>
+                    <p class="mb-0 mt-4 text-center">
+                      <a href="/forgetpassword" class="link">Forgot your password?</a>
+                    </p>
+                    <button type="button" class="btn-secondary btn-sm" onclick="typeText('admin')">Admin</button>
+                    <button type="button" class="btn-secondary btn-sm" onclick="typeText('user1')">User1</button>
+                    <button type="button" class="btn-secondary btn-sm" onclick="typeText('user2')">User2</button>
+                  </div>
+                </div>
+              </div>
+              <div class="card-back">
+                <div class="center-wrap">
+                  <div class="section text-center">
+                    <h4 class="mb-4 pb-3">Sign Up</h4>
+                    <form action="/api/members" method="post" id="signup-form">
+                      <div class="form-group">
+                        <input
+                                type="text"
+                                name="nickname"
+                                class="form-style"
+                                placeholder="暱稱 NickName"
+                                id="nickname-s"
+                                autocomplete="off"
+                        />
+                        <i class="input-icon uil uil-user"></i>
+                      </div>
+                      <div class="form-group mt-2">
+                        <input
+                                type="text"
+                                name="username"
+                                class="form-style"
+                                placeholder="信箱 Email"
+                                id="username-s"
+                                autocomplete="off"
+                        />
+                        <span id="mail-error-s" class="text-danger"></span>
+                        <i class="input-icon uil uil-at"></i>
+                      </div>
+                      <div class="form-group mt-2">
+                        <input
+                                type="password"
+                                name="password"
+                                class="form-style"
+                                placeholder="密碼 Password"
+                                id="password-s"
+                                autocomplete="off"
+                        />
+                        <i class="input-icon uil uil-lock-alt"></i>
+                      </div>
+                      <button id="signup-btn" class="btn mt-4">註冊</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/login.js"></script>
+</body>
+</html>
